@@ -22,3 +22,9 @@
     </form>
 </div>
 <button class="submit-test-button btn btn-success" onclick="document.getElementById('submit-test').click()">Готово!</button>
+<script>
+    var activeCarouselItems = document.querySelectorAll('div.carousel-item.active');
+    for (let i = 1; i < activeCarouselItems.length; i++) {
+        activeCarouselItems[i].classList.remove('active');
+    }
+</script>

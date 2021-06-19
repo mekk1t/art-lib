@@ -10,9 +10,17 @@ namespace KitProjects.ChoiceVisualizer.Controllers
 {
     public class ChoiceController : Controller
     {
-        public IActionResult Films() => PrepareCards("ChoiceVisualizer_Films");
+        public IActionResult Films()
+        {
+            ViewBag.ChoiceType = "Films";
+            return PrepareCards("ChoiceVisualizer_Films");
+        }
 
-        public IActionResult Games() => PrepareCards("ChoiceVisualizer_Games");
+        public IActionResult Games()
+        {
+            ViewBag.ChoiceType = "Games";
+            return PrepareCards("ChoiceVisualizer_Games");
+        }
 
         private ViewResult PrepareCards(string directoryName)
         {
