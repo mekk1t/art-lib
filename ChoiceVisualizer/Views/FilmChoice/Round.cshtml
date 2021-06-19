@@ -1,0 +1,99 @@
+﻿@model KitProjects.ChoiceVisualizer.Models.RoundViewModel
+
+<div id="test-carousel" class="carousel slide text-center" data-ride="false" data-interval="false" >
+    <form enctype="multipart/form-data" asp-controller="FilmChoice" asp-action="Round" method="post" class="carousel-inner">
+        @for (int i = 0; i < Model.FirstHalf.Count; i += 2)
+        {
+            string carousel_item_class = i == 0 ? "carousel-item active" : "carousel-item";
+            string firstImageId = Model.FirstHalf[i].Choice.Title;
+            string secondImageId = Model.FirstHalf[i + 1].Choice.Title;
+            <div class="@carousel_item_class">
+                <div>
+                    <div style="display: flex; flex-direction:row; justify-content:space-between;">
+                        @{
+                            string firstImage = $"data:{Model.FirstHalf[i].Choice.Image.ContentType};base64, {Model.FirstHalf[i].Choice.Image.Base64}";
+                            string secondImage = $"data:{Model.FirstHalf[i + 1].Choice.Image.ContentType};base64, {Model.FirstHalf[i + 1].Choice.Image.Base64}";
+                        }
+                        <figure>
+                            <label class="form-check-label" for="@firstImageId">
+                                <img height="200" src="@firstImage" alt="Картинка" />
+                            </label>
+                            <figcaption>
+                                <input id="@firstImageId" class="form-check-input" name="FirstHalf[@i].Selected" type="checkbox" value="true"/>
+                                @Model.FirstHalf[i].Choice.Title <br />
+                            </figcaption>
+                        </figure>
+                        <figure>
+                            <label class="form-check-label" for="@secondImageId">
+                                <img height="200" src="@secondImage" alt="Картинка" />
+                            </label>
+                            <figcaption>
+                                <input id="@secondImageId" class="form-check-input" name="FirstHalf[@(i + 1)].Selected" type="checkbox" value="true"/>
+                                @Model.FirstHalf[i + 1].Choice.Title
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <input type="hidden" name="FirstHalf[@i].Choice.Title" value="@Model.FirstHalf[i].Choice.Title" />
+                <input type="hidden" name="FirstHalf[@i].Choice.Image.Base64" value="@Model.FirstHalf[i].Choice.Image.Base64" />
+                <input type="hidden" name="FirstHalf[@i].Choice.Image.ContentType" value="@Model.FirstHalf[i].Choice.Image.ContentType" />
+                <input type="hidden" name="FirstHalf[@i].Choice.Image.Link" value="@Model.FirstHalf[i].Choice.Image.Link" />
+                <input type="hidden" name="FirstHalf[@(i + 1)].Choice.Title" value="@Model.FirstHalf[i + 1].Choice.Title" />
+                <input type="hidden" name="FirstHalf[@(i + 1)].Choice.Image.Base64" value="@Model.FirstHalf[i + 1].Choice.Image.Base64" />
+                <input type="hidden" name="FirstHalf[@(i + 1)].Choice.Image.ContentType" value="@Model.FirstHalf[i + 1].Choice.Image.ContentType" />
+                <input type="hidden" name="FirstHalf[@(i + 1)].Choice.Image.Link" value="@Model.FirstHalf[i + 1].Choice.Image.Link" />
+            </div>
+        }
+        @for (int i = 0; i < Model.SecondHalf.Count; i += 2)
+        {
+            <div class="carousel-item">
+                <div>
+                    <div style="display: flex; flex-direction:row; justify-content:space-between;">
+                        @{
+                            string firstImage = $"data:{Model.SecondHalf[i].Choice.Image.ContentType};base64, {Model.SecondHalf[i].Choice.Image.Base64}";
+                            string secondImage = $"data:{Model.SecondHalf[i + 1].Choice.Image.ContentType};base64, {Model.SecondHalf[i + 1].Choice.Image.Base64}";
+                            string firstImageId = Model.SecondHalf[i].Choice.Title;
+                            string secondImageId = Model.SecondHalf[i + 1].Choice.Title;
+                        }
+                        <figure>
+                            <label for="@firstImageId" class="form-check-label">
+                                <img height="200" src="@firstImage" alt="Картинка" />
+                            </label>
+                            <figcaption>
+                                <input id="@firstImageId" class="form-check-input" name="SecondHalf[@i].Selected" type="checkbox" value="true"/>
+                                @Model.SecondHalf[i].Choice.Title
+                                <br />
+                            </figcaption>
+                        </figure>
+                        <figure>
+                            <label for="@secondImageId" class="form-check-label">
+                                <img height="200" src="@secondImage" alt="Картинка" />
+                            </label>
+                            <figcaption>
+                                <input id="@secondImageId" class="form-check-input" name="SecondHalf[@(i + 1)].Selected" type="checkbox" value="true"/>
+                                @Model.SecondHalf[i + 1].Choice.Title
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <input type="hidden" name="SecondHalf[@i].Choice.Title" value="@Model.SecondHalf[i].Choice.Title" />
+                <input type="hidden" name="SecondHalf[@i].Choice.Image.Base64" value="@Model.SecondHalf[i].Choice.Image.Base64" />
+                <input type="hidden" name="SecondHalf[@i].Choice.Image.ContentType" value="@Model.SecondHalf[i].Choice.Image.ContentType" />
+                <input type="hidden" name="SecondHalf[@i].Choice.Image.Link" value="@Model.SecondHalf[i].Choice.Image.Link" />
+                <input type="hidden" name="SecondHalf[@(i + 1)].Choice.Title" value="@Model.SecondHalf[i + 1].Choice.Title" />
+                <input type="hidden" name="SecondHalf[@(i + 1)].Choice.Image.Base64" value="@Model.SecondHalf[i + 1].Choice.Image.Base64" />
+                <input type="hidden" name="SecondHalf[@(i + 1)].Choice.Image.ContentType" value="@Model.SecondHalf[i + 1].Choice.Image.ContentType" />
+                <input type="hidden" name="SecondHalf[@(i + 1)].Choice.Image.Link" value="@Model.SecondHalf[i + 1].Choice.Image.Link" />
+            </div>
+        }
+
+        <input id="submit-test" type="submit" style="display: none;" />
+        <a class="carousel-control-prev" href="#test-carousel" role="button" data-slide="prev">
+            <span class="btn btn-info">Назад</span>
+        </a>
+        <a class="carousel-control-next" href="#test-carousel" role="button" data-slide="next">
+            <span class="btn btn-info">Дальше</span>
+        </a>
+    </form>
+</div>
+<button class="submit-test-button btn btn-success" onclick="document.getElementById('submit-test').click()">Готово!</button>

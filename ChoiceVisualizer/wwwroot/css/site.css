@@ -7,6 +7,15 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.carousel-control-next, .carousel-control-prev {
+    position: initial !important;
+    top: initial !important;
+    margin-bottom: 80px !important;
+    margin-top: 20px !important;
+    margin-left:auto;
+    margin-right:auto;
+}
+
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
