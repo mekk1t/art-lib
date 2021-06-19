@@ -2,6 +2,14 @@
 
 <div id="test-carousel" class="carousel slide text-center" data-ride="false" data-interval="false" >
     <form enctype="multipart/form-data" asp-controller="FilmChoice" asp-action="SemiFinals" method="post" class="carousel-inner">
+        @{
+            ViewBag.ChoicesArrayName = nameof(Model.FirstPair);
+            await Html.RenderPartialAsync("_Half", Model.FirstPair);
+        }
+        @{
+            ViewBag.ChoicesArrayName = nameof(Model.SecondPair);
+            await Html.RenderPartialAsync("_Half", Model.SecondPair);
+        }
         <div class="carousel-item active">
             <div>
                 <div style="display: flex; flex-direction:row; justify-content:space-between;">
@@ -90,3 +98,4 @@
     </form>
 </div>
 <button class="submit-test-button btn btn-success" onclick="document.getElementById('submit-test').click()">Готово!</button>
+<script>fixCarouselItems();</script>
