@@ -1,12 +1,8 @@
 ﻿using FluentAssertions;
 using KitProjects.EnterpriseLibrary.Core.Abstractions;
-using KitProjects.EnterpriseLibrary.Core.Models.Films;
+using KitProjects.EnterpriseLibrary.Core.Models;
 using KitProjects.FileSystemChoicePreparation.PrepareFilmChoices;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace KitProjects.Tests
