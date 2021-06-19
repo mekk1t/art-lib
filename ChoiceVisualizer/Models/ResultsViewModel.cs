@@ -1,16 +1,11 @@
-﻿using KitProjects.EnterpriseLibrary.Core.Models.Films;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using KitProjects.EnterpriseLibrary.Core.Models;
 
 namespace KitProjects.ChoiceVisualizer.Models
 {
     public class ResultsViewModel
     {
-        public Card<FilmChoice> Winner { get; set; }
-        public Card<FilmChoice> SecondPlace { get; set; }
-        public Card<FilmChoice> ThirdPlace { get; set; }
+        public Card<Choice> Winner { get; set; }
+        public Card<Choice> SecondPlace { get; set; }
+        public Card<Choice> ThirdPlace { get; set; }
     }
 }

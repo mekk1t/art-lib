@@ -1,6 +1,6 @@
-﻿namespace KitProjects.EnterpriseLibrary.Core.Models.Films
+﻿namespace KitProjects.EnterpriseLibrary.Core.Models
 {
-    public class FilmChoice
+    public class Choice
     {
         public string Title { get; set; }
         public Image Image { get; set; }
