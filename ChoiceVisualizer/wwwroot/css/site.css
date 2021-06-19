@@ -7,6 +7,14 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.film-image {
+    height: 200px;
+}
+
+.game-image {
+    width: 300px;
+}
+
 .carousel-control-next, .carousel-control-prev {
     position: initial !important;
     top: initial !important;

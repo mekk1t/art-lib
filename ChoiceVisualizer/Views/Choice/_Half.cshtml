@@ -1,0 +1,55 @@
+﻿@using KitProjects.ChoiceVisualizer.Models
+@using KitProjects.EnterpriseLibrary.Core.Models
+
+@model List<Card<Choice>>
+
+@{
+    string choicesArrayName = ViewBag.ChoicesArrayName;
+    string choiceType = ViewBag.ChoiceType;
+}
+
+@for (int i = 0; i < Model.Count; i += 2)
+{
+    string carousel_item_class = i == 0 ? "carousel-item active" : "carousel-item";
+    string firstImageId = Model[i].Choice.Title;
+    string secondImageId = Model[i + 1].Choice.Title;
+    <div class="@carousel_item_class">
+        <div>
+            <div style="display: flex; flex-direction:row; justify-content:space-between;">
+                @{
+                    string firstImage = $"data:{Model[i].Choice.Image.ContentType};base64, {Model[i].Choice.Image.Base64}";
+                    string secondImage = $"data:{Model[i + 1].Choice.Image.ContentType};base64, {Model[i + 1].Choice.Image.Base64}";
+                    string imageClass = choiceType == "Films"
+                        ? "film-image"
+                        : "game-image";
+                }
+                <figure>
+                    <label class="form-check-label" for="@firstImageId">
+                        <img class="@imageClass" src="@firstImage" alt="Картинка" />
+                    </label>
+                    <figcaption>
+                        <input id="@firstImageId" class="form-check-input" name="@(choicesArrayName)[@i].Selected" type="checkbox" value="true"/>
+                        @Model[i].Choice.Title <br />
+                    </figcaption>
+                </figure>
+                <figure>
+                    <label class="form-check-label" for="@secondImageId">
+                        <img class="@imageClass" src="@secondImage" alt="Картинка" />
+                    </label>
+                    <figcaption>
+                        <input id="@secondImageId" class="form-check-input" name="@(choicesArrayName)[@(i + 1)].Selected" type="checkbox" value="true"/>
+                        @Model[i + 1].Choice.Title
+                    </figcaption>
+                </figure>
+            </div>
+        </div>
+        <input type="hidden" name="@(choicesArrayName)[@i].Choice.Title" value="@Model[i].Choice.Title" />
+        <input type="hidden" name="@(choicesArrayName)[@i].Choice.Image.Base64" value="@Model[i].Choice.Image.Base64" />
+        <input type="hidden" name="@(choicesArrayName)[@i].Choice.Image.ContentType" value="@Model[i].Choice.Image.ContentType" />
+        <input type="hidden" name="@(choicesArrayName)[@i].Choice.Image.Link" value="@Model[i].Choice.Image.Link" />
+        <input type="hidden" name="@(choicesArrayName)[@(i + 1)].Choice.Title" value="@Model[i + 1].Choice.Title" />
+        <input type="hidden" name="@(choicesArrayName)[@(i + 1)].Choice.Image.Base64" value="@Model[i + 1].Choice.Image.Base64" />
+        <input type="hidden" name="@(choicesArrayName)[@(i + 1)].Choice.Image.ContentType" value="@Model[i + 1].Choice.Image.ContentType" />
+        <input type="hidden" name="@(choicesArrayName)[@(i + 1)].Choice.Image.Link" value="@Model[i + 1].Choice.Image.Link" />
+    </div>
+}
