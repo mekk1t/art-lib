@@ -2,7 +2,7 @@
 <script src="~/js/fix.js"></script>
 
 <div id="test-carousel" class="carousel slide text-center" data-ride="false" data-interval="false" >
-    <form enctype="multipart/form-data" asp-controller="FilmChoice" asp-action="SemiFinals" method="post" class="carousel-inner">
+    <form enctype="multipart/form-data" asp-controller="Choice" asp-action="SemiFinals" method="post" class="carousel-inner">
         @{
             ViewBag.ChoicesArrayName = nameof(Model.FirstPair);
             await Html.RenderPartialAsync("_Half", Model.FirstPair);
