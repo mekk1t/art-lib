@@ -1,18 +1,21 @@
 ﻿@model KitProjects.ChoiceVisualizer.Models.ResultsViewModel
-<ol>
-    <li>
+<ol class="results">
+    <li class="result">
         <img src="@($"data:{Model.Winner.Choice.Image.ContentType};base64, {Model.Winner.Choice.Image.Base64}")" width="500" />
-        <br />
-        @Model.Winner.Choice.Title
+        <p>
+            @Model.Winner.Choice.Title
+        </p>
     </li>
-    <li>
+    <li class="result">
         <img src="@($"data:{Model.SecondPlace.Choice.Image.ContentType};base64, {Model.SecondPlace.Choice.Image.Base64}")" width="500" />
-        <br />
-        @Model.SecondPlace.Choice.Title
+        <p>
+            @Model.SecondPlace.Choice.Title
+        </p>
     </li>
-    <li>
+    <li class="result">
         <img src="@($"data:{Model.ThirdPlace.Choice.Image.ContentType};base64, {Model.ThirdPlace.Choice.Image.Base64}")" width="500" />
-        <br />
-        @Model.ThirdPlace.Choice.Title
+        <p>
+            @Model.ThirdPlace.Choice.Title
+        </p>
     </li>
 </ol>

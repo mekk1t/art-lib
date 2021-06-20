@@ -11,13 +11,10 @@
                     string secondImage = $"data:{Model.Second.Choice.Image.ContentType};base64, {Model.Second.Choice.Image.Base64}";
                     string firstImageId = Model.First.Choice.Title;
                     string secondImageId = Model.Second.Choice.Title;
-                    string imageClass = ViewBag.ChoiceType == "Films"
-                        ? "film-image"
-                        : "game-image";
                 }
                 <figure>
                     <label class="form-check-label" for="@firstImageId">
-                        <img class="@(imageClass)" src="@firstImage" alt="Картинка" />
+                        <img class="choice-image" src="@firstImage" alt="Картинка" />
                     </label>
                     <figcaption>
                         <input id="@firstImageId" class="form-check-input" name="First.Selected" type="checkbox" value="true" />
@@ -26,7 +23,7 @@
                 </figure>
                 <figure>
                     <label class="form-check-label" for="@secondImageId">
-                        <img class="@(imageClass)" src="@secondImage" alt="Картинка" />
+                        <img class="choice-image" src="@secondImage" alt="Картинка" />
                     </label>
                     <figcaption>
                         <input id="@secondImageId" class="form-check-input" name="Second.Selected" type="checkbox" value="true" />

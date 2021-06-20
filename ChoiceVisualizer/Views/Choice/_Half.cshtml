@@ -5,7 +5,6 @@
 
 @{
     string choicesArrayName = ViewBag.ChoicesArrayName;
-    string choiceType = ViewBag.ChoiceType;
 }
 
 @for (int i = 0; i < Model.Count; i += 2)
@@ -19,13 +18,10 @@
                 @{
                     string firstImage = $"data:{Model[i].Choice.Image.ContentType};base64, {Model[i].Choice.Image.Base64}";
                     string secondImage = $"data:{Model[i + 1].Choice.Image.ContentType};base64, {Model[i + 1].Choice.Image.Base64}";
-                    string imageClass = choiceType == "Films"
-                        ? "film-image"
-                        : "game-image";
                 }
                 <figure>
                     <label class="form-check-label" for="@firstImageId">
-                        <img class="@imageClass" src="@firstImage" alt="Картинка" />
+                        <img class="choice-image" src="@firstImage" alt="Картинка" />
                     </label>
                     <figcaption>
                         <input id="@firstImageId" class="form-check-input" name="@(choicesArrayName)[@i].Selected" type="checkbox" value="true"/>
@@ -34,7 +30,7 @@
                 </figure>
                 <figure>
                     <label class="form-check-label" for="@secondImageId">
-                        <img class="@imageClass" src="@secondImage" alt="Картинка" />
+                        <img class="choice-image" src="@secondImage" alt="Картинка" />
                     </label>
                     <figcaption>
                         <input id="@secondImageId" class="form-check-input" name="@(choicesArrayName)[@(i + 1)].Selected" type="checkbox" value="true"/>

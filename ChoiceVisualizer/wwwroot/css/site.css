@@ -7,12 +7,24 @@ a.navbar-brand {
   word-break: break-all;
 }
 
-.film-image {
-    height: 200px;
+.choice-image {
+    width: 300px;
 }
 
-.game-image {
-    width: 300px;
+.result {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.result img {
+    border-radius: 60px;
+}
+
+.result p {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 50px;
+    margin-left: 150px;
 }
 
 .carousel-control-next, .carousel-control-prev {
