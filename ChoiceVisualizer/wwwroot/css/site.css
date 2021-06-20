@@ -11,20 +11,24 @@ a.navbar-brand {
     width: 300px;
 }
 
-.result {
+.results {
     display: flex;
-    margin-bottom: 10px;
+    justify-content: space-around;
+}
+
+.result {
+    list-style: none;
+    width: 30%;
 }
 
 .result img {
     border-radius: 60px;
+    width: 100%;
 }
 
 .result p {
-    margin-top: auto;
-    margin-bottom: auto;
-    font-size: 50px;
-    margin-left: 150px;
+    text-align: center;
+    font-size: 30px;
 }
 
 .carousel-control-next, .carousel-control-prev {
