@@ -4,13 +4,12 @@
     {
         public Genre()
         {
-
         }
 
         public Genre(long id) : base(id)
         {
         }
 
-        public string Name { get; set; }
+        public string Name { get; init; }
     }
 }
