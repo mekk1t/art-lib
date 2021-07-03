@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>KitProjects.ArtLib.Core</AssemblyName>
+    <RootNamespace>KitProjects.ArtLib.Core</RootNamespace>
   </PropertyGroup>
 
 </Project>

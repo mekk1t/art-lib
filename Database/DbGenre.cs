@@ -1,4 +1,4 @@
-﻿using ArtLib.Models;
+﻿using KitProjects.ArtLib.Core.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Database

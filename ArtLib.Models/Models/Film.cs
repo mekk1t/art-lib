@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ArtLib.Models
+namespace KitProjects.ArtLib.Core.Models
 {
     public class Film : Entity
     {

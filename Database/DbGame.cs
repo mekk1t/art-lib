@@ -1,4 +1,4 @@
-﻿using ArtLib.Models;
+﻿using KitProjects.ArtLib.Core.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 

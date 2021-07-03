@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ArtLib.Models
+namespace KitProjects.ArtLib.Core.Models
 {
     public abstract class Entity
     {
