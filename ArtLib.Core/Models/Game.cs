@@ -7,20 +7,19 @@ namespace KitProjects.ArtLib.Core.Models
     {
         public Game()
         {
-
         }
 
         public Game(long id) : base(id)
         {
         }
 
-        public string Name { get; set; }
-        public string Publisher { get; set; }
-        public string Developer { get; set; }
-        public DateTime ReleaseDate { get; set; }
-        public TimeSpan HoursPlayed { get; set; }
-        public bool IsCompleted { get; set; }
-        public bool IsReplayable { get; set; }
-        public virtual IEnumerable<Genre> Genres { get; set; }
+        public string Name { get; init; }
+        public string Publisher { get; init; }
+        public string Developer { get; init; }
+        public DateTime ReleaseDate { get; init; }
+        public TimeSpan HoursPlayed { get; init; }
+        public bool IsCompleted { get; init; }
+        public bool IsReplayable { get; init; }
+        public virtual IEnumerable<Genre> Genres { get; init; }
     }
 }

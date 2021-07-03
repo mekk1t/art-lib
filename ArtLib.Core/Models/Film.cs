@@ -14,11 +14,11 @@ namespace KitProjects.ArtLib.Core.Models
         {
         }
 
-        public string Name { get; set; }
-        public DateTime ReleaseDate { get; set; }
-        public string Director { get; set; }
-        public TimeSpan Duration { get; set; }
-        public string Poster { get; set; }
-        public virtual IEnumerable<Genre> Genres { get; set; }
+        public string Name { get; init; }
+        public DateTime ReleaseDate { get; init; }
+        public string Director { get; init; }
+        public TimeSpan Duration { get; init; }
+        public string Poster { get; init; }
+        public virtual IEnumerable<Genre> Genres { get; init; }
     }
 }

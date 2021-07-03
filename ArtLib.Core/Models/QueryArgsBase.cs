@@ -6,11 +6,11 @@
         public int Limit { get; init; }
         public bool WithRelationships { get; init; }
 
-        public QueryArgsBase()
+        public static QueryArgsBase Default => new()
         {
-            LastId = 0;
-            Limit = 25;
-            WithRelationships = false;
-        }
+            LastId = 0,
+            Limit = 25,
+            WithRelationships = false
+        };
     }
 }
