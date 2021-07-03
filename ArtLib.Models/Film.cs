@@ -19,6 +19,6 @@ namespace ArtLib.Models
         public string Director { get; set; }
         public TimeSpan Duration { get; set; }
         public string Poster { get; set; }
-        public IEnumerable<Genre> Genres { get; set; }
+        public virtual IEnumerable<Genre> Genres { get; set; }
     }
 }

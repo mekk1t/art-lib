@@ -21,6 +21,6 @@ namespace ArtLib.Models
         public TimeSpan HoursPlayed { get; set; }
         public bool IsCompleted { get; set; }
         public bool IsReplayable { get; set; }
-        public IEnumerable<Genre> Genres { get; set; }
+        public virtual IEnumerable<Genre> Genres { get; set; }
     }
 }
