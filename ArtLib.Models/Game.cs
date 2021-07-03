@@ -5,6 +5,7 @@ namespace ArtLib.Models
 {
     public class Game
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public IEnumerable<string> Genres { get; set; }
         public string Publisher { get; set; }

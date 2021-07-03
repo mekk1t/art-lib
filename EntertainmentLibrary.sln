@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArtLib", "ArtLib", "{892558
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtLib.Models", "ArtLib.Models\ArtLib.Models.csproj", "{EA681265-277E-4882-995A-E8EC1228FD6D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{B4DB8815-3904-4498-8784-D72D5E7C1A43}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{EA681265-277E-4882-995A-E8EC1228FD6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA681265-277E-4882-995A-E8EC1228FD6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA681265-277E-4882-995A-E8EC1228FD6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4DB8815-3904-4498-8784-D72D5E7C1A43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4DB8815-3904-4498-8784-D72D5E7C1A43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4DB8815-3904-4498-8784-D72D5E7C1A43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4DB8815-3904-4498-8784-D72D5E7C1A43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +60,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{666F497D-9762-4A3F-B630-BFFDFD95ABF8} = {89255852-3A9B-4AE5-B97E-265D09D9A3E1}
 		{EA681265-277E-4882-995A-E8EC1228FD6D} = {89255852-3A9B-4AE5-B97E-265D09D9A3E1}
+		{B4DB8815-3904-4498-8784-D72D5E7C1A43} = {89255852-3A9B-4AE5-B97E-265D09D9A3E1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8547A843-D675-4FCB-BF90-F9A39D71C806}
