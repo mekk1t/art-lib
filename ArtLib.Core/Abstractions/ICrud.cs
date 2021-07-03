@@ -7,7 +7,7 @@ namespace KitProjects.ArtLib.Core.Abstractions
         where TEntity : class, new()
         where TQueryArgs : QueryArgsBase
     {
-        void Create(TEntity entity);
+        TEntity Create(TEntity entity);
         IEnumerable<TEntity> Read(TQueryArgs baseArgs = default);
         TEntity ReadOrDefault(long id);
         void Update(TEntity entity);

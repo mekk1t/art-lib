@@ -14,7 +14,7 @@ namespace KitProjects.ArtLib.Core
             _crud = crud;
         }
 
-        public void CreateGenre(Genre genre)
+        public Genre CreateGenre(Genre genre)
         {
             if (genre == null)
                 throw new ArgumentNullException(nameof(genre), "Нельзя создать пустой жанр.");
@@ -22,7 +22,7 @@ namespace KitProjects.ArtLib.Core
             if (string.IsNullOrEmpty(genre.Name))
                 throw new ArgumentException("Жанр должен иметь название.");
 
-            _crud.Create(genre);
+            return _crud.Create(genre);
         }
 
         public IEnumerable<Genre> GetAllGenres() => _crud.Read(new QueryArgsBase

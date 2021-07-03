@@ -23,13 +23,18 @@ namespace Database
             };
         }
 
-        public void Create(Genre entity)
+        public Genre Create(Genre entity)
         {
             if (entity.Id != default)
                 throw new DatabaseException("Не задан ID жанра.");
 
-            _dbContext.Add(entity);
+            var entry = _dbContext.Add(entity);
             _dbContext.SaveChanges();
+
+            return new Genre(entry.Entity.Id)
+            {
+                Name = entry.Entity.Name
+            };
         }
 
         public void Delete(long id)
