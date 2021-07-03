@@ -4,7 +4,7 @@ namespace Database.Exceptions
 {
     public class DatabaseException : Exception
     {
-        private const string MESSAGE_TEMPLATE = "Произошла ошибка сохранения данных в БД: {0} \n";
+        private const string MESSAGE_TEMPLATE = "Произошла ошибка при работе с БД: {0} \n";
 
         public DatabaseException(string message) : base(string.Format(MESSAGE_TEMPLATE, message))
         {
