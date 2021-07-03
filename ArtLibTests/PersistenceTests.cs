@@ -5,6 +5,7 @@ using FluentAssertions;
 using KitProjects.ArtLib.Core;
 using KitProjects.ArtLib.Core.Models;
 using System;
+using System.Linq;
 using Xunit;
 
 namespace ArtLibTests
@@ -48,5 +49,47 @@ namespace ArtLibTests
 
             result.Id.Should().NotBe(default);
         }
+
+        [Fact]
+        public void List_all_genres()
+        {
+            SeedGenre();
+            SeedGenre();
+            SeedGenre();
+
+            var result = _sut.GetAllGenres();
+
+            result.Should().NotBeEmpty();
+            result.ToList().ForEach(genre => genre.Id.Should().NotBe(default));
+        }
+
+        [Fact]
+        public void Cant_get_genre_by_default_id()
+        {
+            Action act = () => _sut.GetGenreByIdOrDefault(default);
+
+            act.Should().ThrowExactly<DatabaseException>();
+        }
+
+        [Fact]
+        public void Can_get_genre_by_id()
+        {
+            SeedGenre();
+
+            var result = _sut.GetGenreByIdOrDefault(1);
+
+            result.Should().NotBeNull();
+            result.Id.Should().Be(1);
+        }
+
+        [Fact]
+        public void Genre_by_nonexistent_id_returns_default()
+        {
+            var result = _sut.GetGenreByIdOrDefault(long.MaxValue);
+
+            result.Should().BeNull();
+        }
+
+        private void SeedGenre() => _sut.CreateGenre(new Genre() { Name = Guid.NewGuid().ToString() });
     }
 }

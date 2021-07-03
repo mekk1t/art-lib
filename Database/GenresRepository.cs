@@ -61,6 +61,7 @@ namespace Database
                 .AsNoTracking()
                 .Where(genre => genre.Id >= baseArgs.LastId)
                 .Take(baseArgs.Limit)
+                .Select(genre => new Genre(genre.Id) { Name = genre.Name })
                 .ToList();
         }
 
@@ -71,7 +72,7 @@ namespace Database
 
             var genre = _dbContext.Genres.AsNoTracking().FirstOrDefault(genre => genre.Id == id);
             if (genre == null)
-                throw new DatabaseException($"Жанр с ID {id} отсутствует.");
+                return null;
 
             return new Genre(id)
             {
