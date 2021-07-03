@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ArtLib.Api\ArtLibApi.csproj" />
+    <ProjectReference Include="..\ArtLib.Api\ArtLib.Api.csproj" />
     <ProjectReference Include="..\ArtLib.Core\ArtLib.Core.csproj" />
     <ProjectReference Include="..\ArtLib.Database\ArtLib.Database.csproj" />
   </ItemGroup>

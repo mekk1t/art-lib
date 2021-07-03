@@ -15,9 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArtLib", "ArtLib", "{892558
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtLib.Core", "ArtLib.Core\ArtLib.Core.csproj", "{1FBD1B87-5820-4243-AC64-E87910C0A668}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtLibTests", "ArtLib.Tests\ArtLibTests.csproj", "{8440DA68-AAE7-47E6-8CD0-7AB327C8B0C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtLib.Tests", "ArtLib.Tests\ArtLib.Tests.csproj", "{8440DA68-AAE7-47E6-8CD0-7AB327C8B0C2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtLibApi", "ArtLib.Api\ArtLibApi.csproj", "{871125BB-97EB-4634-B0F7-05F6E13C4DB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtLib.Api", "ArtLib.Api\ArtLib.Api.csproj", "{871125BB-97EB-4634-B0F7-05F6E13C4DB8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtLib.Database", "ArtLib.Database\ArtLib.Database.csproj", "{09AE2161-C90F-4EE6-930B-1C8D32998F66}"
 EndProject
