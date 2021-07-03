@@ -26,7 +26,7 @@ namespace Database
         public Genre Create(Genre entity)
         {
             if (entity.Id != default)
-                throw new DatabaseException("Не задан ID жанра.");
+                throw new DatabaseException("У жанра уже задан ID.");
 
             var dbGenre = new DbGenre(entity);
 
