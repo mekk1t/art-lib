@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtLibApi", "ArtLibApi\ArtL
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArtLib", "ArtLib", "{89255852-3A9B-4AE5-B97E-265D09D9A3E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{B4DB8815-3904-4498-8784-D72D5E7C1A43}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtLib.Database", "Database\ArtLib.Database.csproj", "{B4DB8815-3904-4498-8784-D72D5E7C1A43}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtLib.Core", "ArtLib.Core\ArtLib.Core.csproj", "{1FBD1B87-5820-4243-AC64-E87910C0A668}"
 EndProject

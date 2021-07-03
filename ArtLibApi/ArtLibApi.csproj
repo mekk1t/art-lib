@@ -2,6 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>KitProjects.ArtLib.Api</AssemblyName>
+    <RootNamespace>KitProjects.ArtLib.Api</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\KitProjects.ArtLib.Api.xml</DocumentationFile>
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\KitProjects.ArtLib.Api.xml</DocumentationFile>
+    <OutputPath>bin\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,7 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ArtLib.Core\ArtLib.Core.csproj" />
-    <ProjectReference Include="..\Database\Database.csproj" />
+    <ProjectReference Include="..\Database\ArtLib.Database.csproj" />
   </ItemGroup>
 
 </Project>

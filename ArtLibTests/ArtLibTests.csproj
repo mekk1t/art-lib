@@ -4,6 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <AssemblyName>KitProjectsTests.ArtLib</AssemblyName>
+
+    <RootNamespace>KitProjectsTests.ArtLib</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,7 +27,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ArtLib.Core\ArtLib.Core.csproj" />
     <ProjectReference Include="..\ArtLibApi\ArtLibApi.csproj" />
-    <ProjectReference Include="..\Database\Database.csproj" />
+    <ProjectReference Include="..\Database\ArtLib.Database.csproj" />
   </ItemGroup>
 
 </Project>
