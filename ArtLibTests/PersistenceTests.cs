@@ -1,4 +1,4 @@
-using ArtLibTests.Fixtures;
+﻿using ArtLibTests.Fixtures;
 using Database;
 using Database.Exceptions;
 using FluentAssertions;
@@ -34,6 +34,19 @@ namespace ArtLibTests
             Action act = () => _sut.CreateGenre(newGenre);
 
             act.Should().ThrowExactly<DatabaseException>();
+        }
+
+        [Fact]
+        public void Created_genre_has_new_id_generated()
+        {
+            var newGenre = new Genre
+            {
+                Name = "Новый жанр"
+            };
+
+            var result = _sut.CreateGenre(newGenre);
+
+            result.Id.Should().NotBe(default);
         }
     }
 }
