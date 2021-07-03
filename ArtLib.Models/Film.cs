@@ -3,9 +3,12 @@ using System.Collections.Generic;
 
 namespace ArtLib.Models
 {
-    public class Film
+    public class Film : Entity
     {
-        public Guid Id { get; set; }
+        public Film(long id) : base(id)
+        {
+        }
+
         public string Name { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string Director { get; set; }

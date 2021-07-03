@@ -3,9 +3,12 @@ using System.Collections.Generic;
 
 namespace ArtLib.Models
 {
-    public class Game
+    public class Game : Entity
     {
-        public Guid Id { get; set; }
+        public Game(long id) : base(id)
+        {
+        }
+
         public string Name { get; set; }
         public IEnumerable<string> Genres { get; set; }
         public string Publisher { get; set; }
