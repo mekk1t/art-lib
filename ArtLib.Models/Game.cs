@@ -5,6 +5,11 @@ namespace ArtLib.Models
 {
     public class Game : Entity
     {
+        public Game()
+        {
+
+        }
+
         public Game(long id) : base(id)
         {
         }

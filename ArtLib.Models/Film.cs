@@ -5,6 +5,11 @@ namespace ArtLib.Models
 {
     public class Film : Entity
     {
+        public Film()
+        {
+
+        }
+
         public Film(long id) : base(id)
         {
         }
