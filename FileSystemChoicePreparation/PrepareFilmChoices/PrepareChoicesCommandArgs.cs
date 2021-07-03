@@ -1,10 +1,10 @@
 ﻿namespace KitProjects.FileSystemChoicePreparation.PrepareFilmChoices
 {
-    public class PrepareFilmChoicesCommandArgs
+    public class PrepareChoicesCommandArgs
     {
         public string ImagesDirectoryPath { get; }
 
-        public PrepareFilmChoicesCommandArgs(string imagesDirectoryPath)
+        public PrepareChoicesCommandArgs(string imagesDirectoryPath)
         {
             ImagesDirectoryPath = imagesDirectoryPath;
         }

@@ -1,5 +1,5 @@
 ﻿using KitProjects.ChoiceVisualizer.Models;
-using KitProjects.EnterpriseLibrary.Core.Models.Films;
+using KitProjects.EnterpriseLibrary.Core.Models;
 using KitProjects.FileSystemChoicePreparation.PrepareFilmChoices;
 using Medallion;
 using Microsoft.AspNetCore.Mvc;
@@ -8,12 +8,24 @@ using System.Linq;
 
 namespace KitProjects.ChoiceVisualizer.Controllers
 {
-    public class FilmChoiceController : Controller
+    public class ChoiceController : Controller
     {
-        public IActionResult Prepare()
+        public IActionResult Films()
         {
-            var command = new PrepareFilmChoicesCommand();
-            var choices = command.Execute(new PrepareFilmChoicesCommandArgs(@"C:\Users\admin\Pictures\ChoiceVisualizer"));
+            ViewBag.ChoiceType = "Films";
+            return PrepareCards("ChoiceVisualizer_Films");
+        }
+
+        public IActionResult Games()
+        {
+            ViewBag.ChoiceType = "Games";
+            return PrepareCards("ChoiceVisualizer_Games");
+        }
+
+        private ViewResult PrepareCards(string directoryName)
+        {
+            var command = new PrepareChoicesCommand();
+            var choices = command.Execute(new PrepareChoicesCommandArgs(@$"C:\Users\admin\Pictures\{directoryName}"));
             if (choices.Length >= 64)
                 choices = choices.Shuffled().Take(64).ToArray();
             else if (choices.Length >= 32 && choices.Length < 64)
@@ -22,7 +34,7 @@ namespace KitProjects.ChoiceVisualizer.Controllers
                 choices = choices.Shuffled().Take(16).ToArray();
 
             choices.Shuffle();
-            var cards = choices.Select(choice => new Card<FilmChoice>
+            var cards = choices.Select(choice => new Card<Choice>
             {
                 Choice = choice,
                 Selected = false
@@ -70,7 +82,7 @@ namespace KitProjects.ChoiceVisualizer.Controllers
         {
             var first = semiFinals.FirstPair.First(choice => choice.Selected);
             var second = semiFinals.SecondPair.First(choice => choice.Selected);
-            var thirdPlace = new List<Card<FilmChoice>>
+            var thirdPlace = new List<Card<Choice>>
             {
                 semiFinals.FirstPair.First(choice => choice.Selected == false),
                 semiFinals.SecondPair.First(choice => choice.Selected == false)
@@ -107,7 +119,7 @@ namespace KitProjects.ChoiceVisualizer.Controllers
             return View("Results", viewModel);
         }
 
-        private static void NullifySelection(IEnumerable<Card<FilmChoice>> choices)
+        private static void NullifySelection(IEnumerable<Card<Choice>> choices)
         {
             foreach (var choice in choices)
             {

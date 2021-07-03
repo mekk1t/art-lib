@@ -1,21 +1,17 @@
 ﻿using FluentAssertions;
 using KitProjects.EnterpriseLibrary.Core.Abstractions;
-using KitProjects.EnterpriseLibrary.Core.Models.Films;
+using KitProjects.EnterpriseLibrary.Core.Models;
 using KitProjects.FileSystemChoicePreparation.PrepareFilmChoices;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace KitProjects.Tests
 {
     public class PrepareFilmChoicesTests
     {
-        private readonly ICommand<PrepareFilmChoicesCommandArgs, FilmChoice[]> _sut;
+        private readonly ICommand<PrepareChoicesCommandArgs, Choice[]> _sut;
 
-        public PrepareFilmChoicesTests() => _sut = new PrepareFilmChoicesCommand();
+        public PrepareFilmChoicesTests() => _sut = new PrepareChoicesCommand();
 
         [Theory]
         [InlineData("")]
@@ -23,7 +19,7 @@ namespace KitProjects.Tests
         [InlineData(" ")]
         public void Cant_prepare_film_choices_with_invalid_images_directory_path(string path)
         {
-            Action act = () => _sut.Execute(new PrepareFilmChoicesCommandArgs(path));
+            Action act = () => _sut.Execute(new PrepareChoicesCommandArgs(path));
 
             act.Should().ThrowExactly<ArgumentException>().WithMessage("Указан пустой адрес к папке изображений.");
         }
@@ -33,7 +29,7 @@ namespace KitProjects.Tests
         {
             string emptyDirectoryPath = @"C:\Users\admin\Pictures\Empty";
 
-            var result = _sut.Execute(new PrepareFilmChoicesCommandArgs(emptyDirectoryPath));
+            var result = _sut.Execute(new PrepareChoicesCommandArgs(emptyDirectoryPath));
 
             result.Should().BeEmpty();
         }
@@ -43,7 +39,7 @@ namespace KitProjects.Tests
         {
             string imagesDirectoryPath = @"C:\Users\admin\Pictures\ХронологияПрослушиваний";
 
-            var result = _sut.Execute(new PrepareFilmChoicesCommandArgs(imagesDirectoryPath));
+            var result = _sut.Execute(new PrepareChoicesCommandArgs(imagesDirectoryPath));
 
             result.Should().NotBeEmpty();
         }

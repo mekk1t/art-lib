@@ -7,6 +7,30 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.choice-image {
+    width: 300px;
+}
+
+.results {
+    display: flex;
+    justify-content: space-around;
+}
+
+.result {
+    list-style: none;
+    width: 30%;
+}
+
+.result img {
+    border-radius: 60px;
+    width: 100%;
+}
+
+.result p {
+    text-align: center;
+    font-size: 30px;
+}
+
 .carousel-control-next, .carousel-control-prev {
     position: initial !important;
     top: initial !important;

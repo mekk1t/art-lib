@@ -1,0 +1,25 @@
+﻿@model KitProjects.ChoiceVisualizer.Models.SemiFinalsViewModel
+<script src="~/js/fix.js"></script>
+
+<div id="test-carousel" class="carousel slide text-center" data-ride="false" data-interval="false" >
+    <form enctype="multipart/form-data" asp-controller="Choice" asp-action="SemiFinals" method="post" class="carousel-inner">
+        @{
+            ViewBag.ChoicesArrayName = nameof(Model.FirstPair);
+            await Html.RenderPartialAsync("_Half", Model.FirstPair);
+        }
+        @{
+            ViewBag.ChoicesArrayName = nameof(Model.SecondPair);
+            await Html.RenderPartialAsync("_Half", Model.SecondPair);
+        }
+
+        <input id="submit-test" type="submit" style="display: none;" />
+        <a class="carousel-control-prev" href="#test-carousel" role="button" data-slide="prev">
+            <span class="btn btn-info">Назад</span>
+        </a>
+        <a class="carousel-control-next" href="#test-carousel" role="button" data-slide="next">
+            <span class="btn btn-info">Дальше</span>
+        </a>
+    </form>
+</div>
+<button class="submit-test-button btn btn-success" onclick="document.getElementById('submit-test').click()">Готово!</button>
+<script>fixCarouselItems();</script>

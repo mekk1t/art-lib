@@ -1,15 +1,11 @@
-﻿using KitProjects.EnterpriseLibrary.Core.Models.Films;
-using System;
+﻿using KitProjects.EnterpriseLibrary.Core.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KitProjects.ChoiceVisualizer.Models
 {
     public class SemiFinalsViewModel
     {
-        public List<Card<FilmChoice>> FirstPair { get; set; }
-        public List<Card<FilmChoice>> SecondPair { get; set; }
+        public List<Card<Choice>> FirstPair { get; set; }
+        public List<Card<Choice>> SecondPair { get; set; }
     }
 }
