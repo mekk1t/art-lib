@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ArtLib.Models\ArtLib.Core.csproj" />
+    <ProjectReference Include="..\ArtLib.Core\ArtLib.Core.csproj" />
   </ItemGroup>
 
 </Project>
