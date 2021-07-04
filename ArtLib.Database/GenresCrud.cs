@@ -1,17 +1,18 @@
 ﻿using Database.Exceptions;
 using KitProjects.ArtLib.Core.Abstractions;
 using KitProjects.ArtLib.Core.Models;
+using KitProjects.ArtLib.Database.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Database
 {
-    public class GenresRepository : ICrud<Genre, QueryArgsBase>
+    public class GenresCrud : ICrud<Genre, QueryArgsBase>
     {
         private readonly AppDbContext _dbContext;
 
-        public GenresRepository(AppDbContext dbContext)
+        public GenresCrud(AppDbContext dbContext)
         {
             _dbContext = dbContext;
             _dbContext.SaveChangesFailed += (obj, args) =>

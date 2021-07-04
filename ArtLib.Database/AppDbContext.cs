@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using KitProjects.ArtLib.Database.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Database
 {

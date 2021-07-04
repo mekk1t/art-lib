@@ -3,6 +3,7 @@ using Database.Exceptions;
 using KitProjects.ArtLib.Core.Abstractions;
 using KitProjects.ArtLib.Core.Models;
 using KitProjects.ArtLib.Database.Extensions;
+using KitProjects.ArtLib.Database.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ using System.Linq;
 
 namespace KitProjects.ArtLib.Database
 {
-    public class GamesRepository : ICrud<Game, QueryArgsBase>
+    public class GamesCrud : ICrud<Game, QueryArgsBase>
     {
         private readonly AppDbContext _dbContext;
 
-        public GamesRepository(AppDbContext dbContext)
+        public GamesCrud(AppDbContext dbContext)
         {
             _dbContext = dbContext;
             _dbContext.SaveChangesFailed += (obj, args) =>

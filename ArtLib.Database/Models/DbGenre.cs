@@ -1,7 +1,7 @@
 ﻿using KitProjects.ArtLib.Core.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace Database
+namespace KitProjects.ArtLib.Database.Models
 {
     public class DbGenre
     {

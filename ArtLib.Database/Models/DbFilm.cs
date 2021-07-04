@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace Database
+namespace KitProjects.ArtLib.Database.Models
 {
     public class DbFilm
     {

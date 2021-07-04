@@ -4,12 +4,9 @@ using FluentAssertions;
 using KitProjects.ArtLib.Core;
 using KitProjects.ArtLib.Core.Models;
 using KitProjects.ArtLib.Database;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace KitProjectsTests.ArtLib
@@ -24,8 +21,8 @@ namespace KitProjectsTests.ArtLib
         public GamesCrudTests(DbFixture fixture)
         {
             _dbContext = fixture.DbContext;
-            _sut = new GamesService(new GamesRepository(_dbContext));
-            _genresService = new GenresService(new GenresRepository(_dbContext));
+            _sut = new GamesService(new GamesCrud(_dbContext));
+            _genresService = new GenresService(new GenresCrud(_dbContext));
         }
 
         [Fact]

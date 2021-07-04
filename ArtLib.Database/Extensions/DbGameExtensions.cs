@@ -1,4 +1,5 @@
 ﻿using Database;
+using KitProjects.ArtLib.Database.Models;
 using System.Linq;
 
 namespace KitProjects.ArtLib.Database.Extensions

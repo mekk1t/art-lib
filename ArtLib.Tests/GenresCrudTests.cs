@@ -19,7 +19,7 @@ namespace ArtLibTests
         public GenresCrudTests(DbFixture fixture)
         {
             _dbContext = fixture.DbContext;
-            _sut = new GenresService(new GenresRepository(_dbContext));
+            _sut = new GenresService(new GenresCrud(_dbContext));
         }
 
         public void Dispose() => _dbContext.Dispose();
