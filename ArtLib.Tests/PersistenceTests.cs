@@ -120,6 +120,17 @@ namespace ArtLibTests
                 .Name.Should().Be("I am Death. The destroyer of worlds.");
         }
 
+        [Fact]
+        public void Can_delete_genre_by_id()
+        {
+            var seed = SeedGenre();
+
+            Action act = () => _sut.DeleteGenreById(seed.Id);
+
+            act.Should().NotThrow();
+            _sut.GetGenreByIdOrDefault(seed.Id).Should().BeNull();
+        }
+
         private Genre SeedGenre() => _sut.CreateGenre(new Genre() { Name = Guid.NewGuid().ToString() });
     }
 }
