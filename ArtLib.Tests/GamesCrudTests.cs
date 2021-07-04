@@ -81,6 +81,21 @@ namespace KitProjectsTests.ArtLib
             result.Genres.Should().HaveCount(2);
         }
 
+        [Fact]
+        public void Default_list_has_no_relationships()
+        {
+            SeedGame(new[] { new Genre() { Name = Guid.NewGuid().ToString() } });
+            SeedGame(new[] { new Genre() { Name = Guid.NewGuid().ToString() } });
+            var queryArgs = new QueryArgsBase();
+
+            var result = _sut.GetGamesList(queryArgs);
+
+            result.Should().HaveCountLessOrEqualTo(queryArgs.Limit);
+            result.ToList().ForEach(game => game.Genres.Should().BeEmpty());
+        }
+
+        private Game SeedGame(IEnumerable<Genre> genres = default) => _sut.CreateGame(CreateDefaultGame(genres));
+
         public void Dispose() => _dbContext.Dispose();
         private static Game CreateDefaultGame(IEnumerable<Genre> genres = default) =>
             new()
