@@ -2,15 +2,15 @@
 {
     public class QueryArgsBase
     {
-        public long LastId { get; init; }
-        public int Limit { get; init; }
-        public bool WithRelationships { get; init; }
+        public long LastId { get; }
+        public int Limit { get; }
+        public bool WithRelationships { get; }
 
-        public static QueryArgsBase Default => new()
+        public QueryArgsBase(long lastId = 0, int limit = 25, bool withRelationships = false)
         {
-            LastId = 0,
-            Limit = 25,
-            WithRelationships = false
-        };
+            LastId = lastId;
+            Limit = limit;
+            WithRelationships = withRelationships;
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace Database
         public TimeSpan HoursPlayed { get; private set; }
         public bool IsCompleted { get; private set; }
         public bool IsReplayable { get; private set; }
-        public IEnumerable<DbGenre> Genres { get; } = new List<DbGenre>();
+        public IEnumerable<DbGenre> Genres { get; private set; } = new List<DbGenre>();
 
         /// <summary>
         /// Конструктор для EF Core.
@@ -57,6 +57,19 @@ namespace Database
             IsCompleted = domainModel.IsCompleted;
             IsReplayable = domainModel.IsReplayable;
             Genres = domainModel.Genres.Select(g => new DbGenre(g));
+        }
+
+        public void Update(Game game)
+        {
+            Id = game.Id;
+            Name = game.Name;
+            Developer = game.Developer;
+            Publisher = game.Publisher;
+            ReleaseDate = game.ReleaseDate;
+            HoursPlayed = game.HoursPlayed;
+            IsCompleted = game.IsCompleted;
+            IsReplayable = game.IsReplayable;
+            Genres = game.Genres.Select(g => new DbGenre(g));
         }
     }
 }

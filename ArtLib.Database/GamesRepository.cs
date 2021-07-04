@@ -2,7 +2,7 @@
 using Database.Exceptions;
 using KitProjects.ArtLib.Core.Abstractions;
 using KitProjects.ArtLib.Core.Models;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -61,17 +61,71 @@ namespace KitProjects.ArtLib.Database
 
         public IEnumerable<Game> Read(QueryArgsBase baseArgs = null)
         {
-            throw new NotImplementedException();
+            if (baseArgs == null)
+                baseArgs = new();
+
+            var query = _dbContext.Games.AsNoTracking();
+
+            if (baseArgs.WithRelationships)
+                query = query.Include(g => g.Genres);
+
+            query = query
+                .Where(g => g.Id >= baseArgs.LastId)
+                .Take(baseArgs.Limit);
+
+            return query
+                .Select(g => new Game(g.Id)
+                {
+                    Developer = g.Developer,
+                    ReleaseDate = g.ReleaseDate,
+                    Genres = g.Genres.Select(genre => new Genre(genre.Id) { Name = genre.Name }),
+                    HoursPlayed = g.HoursPlayed,
+                    IsCompleted = g.IsCompleted,
+                    IsReplayable = g.IsReplayable,
+                    Name = g.Name,
+                    Publisher = g.Publisher
+                })
+                .ToList();
         }
 
         public Game ReadOrDefault(long id)
         {
-            throw new NotImplementedException();
+            if (id == default)
+                throw new DatabaseException("Указан ID игры по умолчанию.");
+
+            var game = _dbContext.Games
+                .AsNoTracking()
+                .Include(g => g.Genres)
+                .FirstOrDefault(g => g.Id == id);
+            if (game == null)
+                throw new DatabaseException($"Игры с ID {id} не существует.");
+
+            return new Game(game.Id)
+            {
+                Developer = game.Developer,
+                ReleaseDate = game.ReleaseDate,
+                Genres = game.Genres.Select(g => new Genre(g.Id) { Name = g.Name }),
+                HoursPlayed = game.HoursPlayed,
+                IsCompleted = game.IsCompleted,
+                IsReplayable = game.IsReplayable,
+                Name = game.Name,
+                Publisher = game.Publisher
+            };
         }
 
         public void Update(Game entity)
         {
-            throw new NotImplementedException();
+            if (entity == null)
+                throw new DatabaseException("Отсутствует информация об игре.");
+            if (entity.Id == default)
+                throw new DatabaseException("Отсутствует ID игры.");
+
+            var oldGame = _dbContext.Games.FirstOrDefault(g => g.Id == entity.Id);
+            if (oldGame == null)
+                throw new DatabaseException($"Игры с ID {entity.Id} не существует.");
+
+            oldGame.Update(entity);
+            _dbContext.SaveChanges();
         }
     }
 }
