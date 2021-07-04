@@ -11,7 +11,7 @@ namespace Database
         public long Id { get; private set; }
         [Required]
         public string Name { get; private set; }
-        public IEnumerable<DbGenre> Genres { get; private set; }
+        public IEnumerable<DbGenre> Genres { get; } = new List<DbGenre>();
         public string Poster { get; private set; }
         public string Director { get; private set; }
         public DateTime ReleaseDate { get; private set; }
@@ -20,11 +20,10 @@ namespace Database
         /// <summary>
         /// Конструктор для EF Core.
         /// </summary>
-        public DbFilm(long id, string name, string poster, string director, DateTime releaseDate, TimeSpan duration, IEnumerable<DbGenre> genres)
+        private DbFilm(long id, string name, string poster, string director, DateTime releaseDate, TimeSpan duration)
         {
             Id = id;
             Name = name;
-            Genres = genres;
             Poster = poster;
             Director = director;
             ReleaseDate = releaseDate;

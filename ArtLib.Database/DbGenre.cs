@@ -12,7 +12,7 @@ namespace Database
         /// <summary>
         /// Конструктор для EF Core.
         /// </summary>
-        public DbGenre(long id, string name)
+        private DbGenre(long id, string name)
         {
             Id = id;
             Name = name;

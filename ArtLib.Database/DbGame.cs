@@ -17,12 +17,12 @@ namespace Database
         public TimeSpan HoursPlayed { get; private set; }
         public bool IsCompleted { get; private set; }
         public bool IsReplayable { get; private set; }
-        public IEnumerable<DbGenre> Genres { get; private set; }
+        public IEnumerable<DbGenre> Genres { get; } = new List<DbGenre>();
 
         /// <summary>
         /// Конструктор для EF Core.
         /// </summary>
-        public DbGame(
+        private DbGame(
             long id,
             string name,
             string developer,
@@ -30,8 +30,7 @@ namespace Database
             DateTime releaseDate,
             TimeSpan hoursPlayed,
             bool isCompleted,
-            bool isReplayable,
-            IEnumerable<DbGenre> genres)
+            bool isReplayable)
         {
             Id = id;
             Name = name;
@@ -41,7 +40,6 @@ namespace Database
             HoursPlayed = hoursPlayed;
             IsCompleted = isCompleted;
             IsReplayable = isReplayable;
-            Genres = genres;
         }
 
         /// <summary>
