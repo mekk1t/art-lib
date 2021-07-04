@@ -56,7 +56,7 @@ namespace Database
             HoursPlayed = domainModel.HoursPlayed;
             IsCompleted = domainModel.IsCompleted;
             IsReplayable = domainModel.IsReplayable;
-            Genres = domainModel.Genres.Select(g => new DbGenre(g));
+            Genres = domainModel.Genres?.Select(g => new DbGenre(g)) ?? Array.Empty<DbGenre>();
         }
 
         public void Update(Game game)

@@ -11,12 +11,12 @@ using Xunit;
 namespace ArtLibTests
 {
     [Collection("Db")]
-    public sealed class PersistenceTests : IDisposable
+    public sealed class GenresCrudTests : IDisposable
     {
         private readonly GenresService _sut;
         private readonly AppDbContext _dbContext;
 
-        public PersistenceTests(DbFixture fixture)
+        public GenresCrudTests(DbFixture fixture)
         {
             _dbContext = fixture.DbContext;
             _sut = new GenresService(new GenresRepository(_dbContext));
