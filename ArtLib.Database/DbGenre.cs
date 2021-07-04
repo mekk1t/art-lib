@@ -26,5 +26,11 @@ namespace Database
             Id = domainModel.Id;
             Name = domainModel.Name;
         }
+
+        public void Update(Genre domainModel)
+        {
+            Id = domainModel.Id;
+            Name = domainModel.Name;
+        }
     }
 }

@@ -87,9 +87,12 @@ namespace Database
             if (entity.Id == default)
                 throw new DatabaseException("Отсутствует ID жанра.");
 
-            var updatedGenre = new DbGenre(entity);
+            var oldGenre = _dbContext.Genres.FirstOrDefault(g => g.Id == entity.Id);
+            if (oldGenre == null)
+                throw new DatabaseException($"Не удалось найти жанр с ID {entity.Id}");
 
-            _dbContext.Genres.Update(updatedGenre);
+            oldGenre.Update(entity);
+
             _dbContext.SaveChanges();
         }
     }

@@ -108,6 +108,18 @@ namespace ArtLibTests
             act.Should().Throw<DatabaseException>();
         }
 
-        private void SeedGenre() => _sut.CreateGenre(new Genre() { Name = Guid.NewGuid().ToString() });
+        [Fact]
+        public void Genre_update_overwrites_its_name()
+        {
+            var seed = SeedGenre();
+            var update = new Genre(seed.Id) { Name = "I am Death. The destroyer of worlds." };
+
+            Action act = () => _sut.UpdateGenre(update);
+            act.Should().NotThrow();
+            var result = _sut.GetGenreByIdOrDefault(seed.Id)
+                .Name.Should().Be("I am Death. The destroyer of worlds.");
+        }
+
+        private Genre SeedGenre() => _sut.CreateGenre(new Genre() { Name = Guid.NewGuid().ToString() });
     }
 }
