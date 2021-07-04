@@ -1,5 +1,6 @@
 ﻿using Database;
 using KitProjects.Api.AspNetCore.Extensions;
+using KitProjects.ArtLib.Api.Extensions;
 using KitProjects.ArtLib.Core;
 using KitProjects.ArtLib.Core.Abstractions;
 using KitProjects.ArtLib.Core.Models;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace KitProjects.ArtLib.Api
 {
@@ -33,11 +35,12 @@ namespace KitProjects.ArtLib.Api
             services.AddScoped<GenresService>();
 
             services.AddApiCore(serializeEnumsAsStrings: true);
-            services.AddSwaggerV1("ArtLib");
+            services.AddSwaggerV1("ArtLib", Assembly.GetExecutingAssembly().GetName().Name);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.ApplyDatabaseMigrations();
             app.UseSwaggerDocumentation("ArtLib");
 
             app.UseHttpsRedirection();
