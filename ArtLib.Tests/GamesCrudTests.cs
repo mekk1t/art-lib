@@ -4,6 +4,7 @@ using FluentAssertions;
 using KitProjects.ArtLib.Core;
 using KitProjects.ArtLib.Core.Models;
 using KitProjects.ArtLib.Database;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,25 +19,19 @@ namespace KitProjectsTests.ArtLib
     {
         private readonly GamesService _sut;
         private readonly AppDbContext _dbContext;
+        private readonly GenresService _genresService;
 
         public GamesCrudTests(DbFixture fixture)
         {
             _dbContext = fixture.DbContext;
             _sut = new GamesService(new GamesRepository(_dbContext));
+            _genresService = new GenresService(new GenresRepository(_dbContext));
         }
 
         [Fact]
         public void Can_create_new_game_without_genres()
         {
-            var newGame = new Game
-            {
-                Developer = "Bethesda",
-                ReleaseDate = DateTime.Parse("01.01.2021"),
-                IsCompleted = false,
-                IsReplayable = false,
-                Name = "Fallout",
-                Publisher = "Bethesda"
-            };
+            var newGame = CreateDefaultGame();
 
             var result = _sut.CreateGame(newGame);
 
@@ -46,15 +41,57 @@ namespace KitProjectsTests.ArtLib
         [Fact]
         public void Can_create_new_game_with_existing_genres()
         {
+            var existingGenre = _genresService.CreateGenre(new Genre() { Name = "Пост-апокалипсис RPG" });
+            var newGame = CreateDefaultGame(new[] { existingGenre });
 
+            var result = _sut.CreateGame(newGame);
+
+            result.Should().NotBeNull();
+            result.Genres.First().Id.Should().Be(existingGenre.Id);
         }
 
         [Fact]
         public void Can_create_new_game_with_new_genres()
         {
+            var newGame = CreateDefaultGame(new[]
+            {
+                new Genre() { Name = "Это что-то новенькое" },
+                new Genre() { Name = "Это что-то нестаренькое" }
+            });
 
+            var result = _sut.CreateGame(newGame);
+
+            result.Should().NotBeNull();
+            result.Genres.Should().HaveCount(2);
+        }
+
+        [Fact]
+        public void Can_create_new_game_with_mixed_genres()
+        {
+            var existingGenre = _genresService.CreateGenre(new Genre() { Name = "Амифбраихй Акаеиквич" });
+            var newGame = CreateDefaultGame(new[]
+            {
+                existingGenre,
+                new Genre() { Name = "Это что-то еще не существующее в БД!" }
+            });
+
+            var result = _sut.CreateGame(newGame);
+
+            result.Should().NotBeNull();
+            result.Genres.Should().HaveCount(2);
         }
 
         public void Dispose() => _dbContext.Dispose();
+        private static Game CreateDefaultGame(IEnumerable<Genre> genres = default) =>
+            new()
+            {
+                Developer = "Bethesda",
+                ReleaseDate = DateTime.Parse("01.01.2021"),
+                IsCompleted = false,
+                IsReplayable = false,
+                Name = Guid.NewGuid().ToString(),
+                Publisher = "Bethesda",
+                Genres = genres
+            };
     }
 }

@@ -30,6 +30,19 @@ namespace KitProjects.ArtLib.Database
                 throw new DatabaseException("У игры уже задан ID.");
 
             var dbGame = new DbGame(newGame);
+            if (dbGame.Genres != null && dbGame.Genres.Any(genre => genre.Id != default))
+            {
+                var currentGenres = dbGame.Genres.ToList();
+                var existingGenres = currentGenres.Where(g => g.Id != default);
+                var dbGenres = _dbContext.Genres.Where(g => existingGenres.Select(genre => genre.Id).ToList().Contains(g.Id)).ToList();
+                dbGame.Genres.Clear();
+                foreach (var genre in currentGenres)
+                {
+                    if (genre.Id == default)
+                        dbGame.Genres.Add(genre);
+                }
+                dbGame.Genres.AddRange(dbGenres);
+            }
 
             var entity = _dbContext.Add(dbGame).Entity;
             _dbContext.SaveChanges();
