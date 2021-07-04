@@ -3,6 +3,7 @@ using Database.Exceptions;
 using KitProjects.ArtLib.Core.Abstractions;
 using KitProjects.ArtLib.Core.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -91,7 +92,9 @@ namespace KitProjects.ArtLib.Database
                 {
                     Developer = g.Developer,
                     ReleaseDate = g.ReleaseDate,
-                    Genres = g.Genres.Select(genre => new Genre(genre.Id) { Name = genre.Name }),
+                    Genres = baseArgs.WithRelationships
+                        ? g.Genres.Select(genre => new Genre(genre.Id) { Name = genre.Name })
+                        : Array.Empty<Genre>(),
                     HoursPlayed = g.HoursPlayed,
                     IsCompleted = g.IsCompleted,
                     IsReplayable = g.IsReplayable,

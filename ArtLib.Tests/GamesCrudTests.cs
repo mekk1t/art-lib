@@ -17,12 +17,14 @@ namespace KitProjectsTests.ArtLib
     [Collection("Db")]
     public class GamesCrudTests : IDisposable
     {
-        private readonly GamesService _sut;
+        private GamesService _sut;
         private readonly AppDbContext _dbContext;
         private readonly GenresService _genresService;
+        private readonly DbFixture _fixture;
 
         public GamesCrudTests(DbFixture fixture)
         {
+            _fixture = fixture;
             _dbContext = fixture.DbContext;
             _sut = new GamesService(new GamesRepository(_dbContext));
             _genresService = new GenresService(new GenresRepository(_dbContext));
@@ -87,6 +89,8 @@ namespace KitProjectsTests.ArtLib
             SeedGame(new[] { new Genre() { Name = Guid.NewGuid().ToString() } });
             SeedGame(new[] { new Genre() { Name = Guid.NewGuid().ToString() } });
             var queryArgs = new QueryArgsBase();
+            using var dbContext = _fixture.DbContext;
+            _sut = new GamesService(new GamesRepository(dbContext));
 
             var result = _sut.GetGamesList(queryArgs);
 
