@@ -17,14 +17,12 @@ namespace KitProjectsTests.ArtLib
     [Collection("Db")]
     public class GamesCrudTests : IDisposable
     {
-        private GamesService _sut;
+        private readonly GamesService _sut;
         private readonly AppDbContext _dbContext;
         private readonly GenresService _genresService;
-        private readonly DbFixture _fixture;
 
         public GamesCrudTests(DbFixture fixture)
         {
-            _fixture = fixture;
             _dbContext = fixture.DbContext;
             _sut = new GamesService(new GamesRepository(_dbContext));
             _genresService = new GenresService(new GenresRepository(_dbContext));
@@ -89,13 +87,130 @@ namespace KitProjectsTests.ArtLib
             SeedGame(new[] { new Genre() { Name = Guid.NewGuid().ToString() } });
             SeedGame(new[] { new Genre() { Name = Guid.NewGuid().ToString() } });
             var queryArgs = new QueryArgsBase();
-            using var dbContext = _fixture.DbContext;
-            _sut = new GamesService(new GamesRepository(dbContext));
 
             var result = _sut.GetGamesList(queryArgs);
 
             result.Should().HaveCountLessOrEqualTo(queryArgs.Limit);
             result.ToList().ForEach(game => game.Genres.Should().BeEmpty());
+        }
+
+        [Fact]
+        public void Can_load_list_with_relationships()
+        {
+            SeedGame(new[] { new Genre() { Name = Guid.NewGuid().ToString() } });
+            SeedGame(new[] { new Genre() { Name = Guid.NewGuid().ToString() } });
+            var queryArgs = new QueryArgsBase(withRelationships: true);
+
+            var result = _sut.GetGamesList(queryArgs);
+
+            result.Should().HaveCountLessOrEqualTo(queryArgs.Limit);
+            result.Should().Contain(game => game.Genres.Any());
+        }
+
+        [Fact]
+        public void Can_get_game_by_id()
+        {
+            var seed = SeedGame();
+
+            var result = _sut.GetGameOrDefault(seed.Id);
+
+            result.Should().NotBeNull();
+            result.Id.Should().Be(seed.Id);
+        }
+
+        [Fact]
+        public void Games_service_replaces_old_game_without_genres()
+        {
+            var oldGame = SeedGame();
+            var newGame = new Game(oldGame.Id)
+            {
+                Developer = "Мафака",
+                ReleaseDate = DateTime.Parse("01.01.2000"),
+                Name = "Новый гейм"
+            };
+
+            Action act = () => _sut.UpdateGame(newGame);
+
+            act.Should().NotThrow();
+            _ = _sut.GetGameOrDefault(newGame.Id)
+                .Developer.Should().NotBeSameAs(oldGame.Developer);
+        }
+
+        [Fact]
+        public void Games_service_adds_existing_genres_to_old_game()
+        {
+            var existingGenres = new[]
+            {
+                _genresService.CreateGenre(new Genre(){ Name = Guid.NewGuid().ToString() }),
+                _genresService.CreateGenre(new Genre(){ Name = Guid.NewGuid().ToString() })
+            };
+            var oldGame = SeedGame(existingGenres);
+            var newGame = new Game(oldGame.Id)
+            {
+                Name = oldGame.Name,
+                Genres = existingGenres
+            };
+
+            Action act = () => _sut.UpdateGame(newGame);
+
+            act.Should().NotThrow();
+            _ = _sut.GetGameOrDefault(newGame.Id)
+                .Genres.Should().HaveCount(2);
+        }
+
+        [Fact]
+        public void Games_service_adds_nonexistent_genres_to_old_game()
+        {
+            var newGenres = new[]
+            {
+                new Genre(){ Name = Guid.NewGuid().ToString() },
+                new Genre(){ Name = Guid.NewGuid().ToString() }
+            };
+            var oldGame = SeedGame();
+            var newGame = new Game(oldGame.Id)
+            {
+                Name = oldGame.Name,
+                Genres = newGenres
+            };
+
+            Action act = () => _sut.UpdateGame(newGame);
+
+            act.Should().NotThrow();
+            _ = _sut.GetGameOrDefault(newGame.Id)
+                .Genres.Should().HaveCount(2);
+        }
+
+        [Fact]
+        public void Games_service_adds_mixed_genres_to_old_game()
+        {
+            var newGenres = new[]
+            {
+                new Genre(){ Name = Guid.NewGuid().ToString() },
+                new Genre(){ Name = Guid.NewGuid().ToString() },
+                _genresService.CreateGenre(new Genre(){ Name = Guid.NewGuid().ToString() })
+            };
+            var oldGame = SeedGame();
+            var newGame = new Game(oldGame.Id)
+            {
+                Name = oldGame.Name,
+                Genres = newGenres
+            };
+
+            Action act = () => _sut.UpdateGame(newGame);
+            act.Should().NotThrow();
+            _ = _sut.GetGameOrDefault(newGame.Id)
+                .Genres.Should().HaveCount(3);
+        }
+
+        [Fact]
+        public void Games_service_deletes_a_game_by_id()
+        {
+            var oldGame = SeedGame();
+
+            Action act = () => _sut.DeleteGameById(oldGame.Id);
+
+            act.Should().NotThrow();
+            _ = _sut.GetGameOrDefault(oldGame.Id).Should().BeNull();
         }
 
         private Game SeedGame(IEnumerable<Genre> genres = default) => _sut.CreateGame(CreateDefaultGame(genres));

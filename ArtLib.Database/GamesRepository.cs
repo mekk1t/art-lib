@@ -2,6 +2,7 @@
 using Database.Exceptions;
 using KitProjects.ArtLib.Core.Abstractions;
 using KitProjects.ArtLib.Core.Models;
+using KitProjects.ArtLib.Database.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -31,19 +32,7 @@ namespace KitProjects.ArtLib.Database
                 throw new DatabaseException("У игры уже задан ID.");
 
             var dbGame = new DbGame(newGame);
-            if (dbGame.Genres != null && dbGame.Genres.Any(genre => genre.Id != default))
-            {
-                var currentGenres = dbGame.Genres.ToList();
-                var existingGenres = currentGenres.Where(g => g.Id != default);
-                var dbGenres = _dbContext.Genres.Where(g => existingGenres.Select(genre => genre.Id).ToList().Contains(g.Id)).ToList();
-                dbGame.Genres.Clear();
-                foreach (var genre in currentGenres)
-                {
-                    if (genre.Id == default)
-                        dbGame.Genres.Add(genre);
-                }
-                dbGame.Genres.AddRange(dbGenres);
-            }
+            dbGame.CheckForExistingGenres(_dbContext);
 
             var entity = _dbContext.Add(dbGame).Entity;
             _dbContext.SaveChanges();
@@ -114,7 +103,7 @@ namespace KitProjects.ArtLib.Database
                 .Include(g => g.Genres)
                 .FirstOrDefault(g => g.Id == id);
             if (game == null)
-                throw new DatabaseException($"Игры с ID {id} не существует.");
+                return null;
 
             return new Game(game.Id)
             {
@@ -136,11 +125,13 @@ namespace KitProjects.ArtLib.Database
             if (entity.Id == default)
                 throw new DatabaseException("Отсутствует ID игры.");
 
-            var oldGame = _dbContext.Games.FirstOrDefault(g => g.Id == entity.Id);
-            if (oldGame == null)
+            var dbGame = _dbContext.Games.FirstOrDefault(g => g.Id == entity.Id);
+            if (dbGame == null)
                 throw new DatabaseException($"Игры с ID {entity.Id} не существует.");
 
-            oldGame.Update(entity);
+            dbGame.Update(entity);
+            dbGame.CheckForExistingGenres(_dbContext);
+
             _dbContext.SaveChanges();
         }
     }

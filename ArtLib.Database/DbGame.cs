@@ -69,7 +69,7 @@ namespace Database
             HoursPlayed = game.HoursPlayed;
             IsCompleted = game.IsCompleted;
             IsReplayable = game.IsReplayable;
-            Genres = game.Genres.Select(g => new DbGenre(g)).ToList();
+            Genres = game.Genres?.Select(g => new DbGenre(g)).ToList() ?? new List<DbGenre>();
         }
     }
 }
