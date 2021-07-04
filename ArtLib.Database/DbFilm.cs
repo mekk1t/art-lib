@@ -1,14 +1,45 @@
 ﻿using KitProjects.ArtLib.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Database
 {
-    public class DbFilm : Film
+    public class DbFilm
     {
-        public new long Id { get; set; }
+        public long Id { get; private set; }
         [Required]
-        public new string Name { get; set; }
-        public new IEnumerable<DbGenre> Genres { get; set; }
+        public string Name { get; private set; }
+        public IEnumerable<DbGenre> Genres { get; private set; }
+        public string Poster { get; private set; }
+        public string Director { get; private set; }
+        public DateTime ReleaseDate { get; private set; }
+        public TimeSpan Duration { get; private set; }
+
+        /// <summary>
+        /// Конструктор для EF Core.
+        /// </summary>
+        public DbFilm(long id, string name, string poster, string director, DateTime releaseDate, TimeSpan duration, IEnumerable<DbGenre> genres)
+        {
+            Id = id;
+            Name = name;
+            Genres = genres;
+            Poster = poster;
+            Director = director;
+            ReleaseDate = releaseDate;
+            Duration = duration;
+        }
+
+        public DbFilm(Film domainModel)
+        {
+            Id = domainModel.Id;
+            Name = domainModel.Name;
+            Poster = domainModel.Poster;
+            Genres = domainModel.Genres.Select(g => new DbGenre(g));
+            Director = domainModel.Director;
+            ReleaseDate = domainModel.ReleaseDate;
+            Duration = domainModel.Duration;
+        }
     }
 }

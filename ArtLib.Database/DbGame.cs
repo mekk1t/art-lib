@@ -6,17 +6,23 @@ using System.Linq;
 
 namespace Database
 {
-    public class DbGame : Game
+    public class DbGame
     {
-        public new long Id { get; private set; }
+        public long Id { get; private set; }
         [Required]
-        public new string Name { get; private set; }
-        public new IEnumerable<DbGenre> Genres { get; private set; }
+        public string Name { get; private set; }
+        public string Developer { get; private set; }
+        public string Publisher { get; private set; }
+        public DateTime ReleaseDate { get; private set; }
+        public TimeSpan HoursPlayed { get; private set; }
+        public bool IsCompleted { get; private set; }
+        public bool IsReplayable { get; private set; }
+        public IEnumerable<DbGenre> Genres { get; private set; }
 
         /// <summary>
         /// Конструктор для EF Core.
         /// </summary>
-        internal DbGame(
+        public DbGame(
             long id,
             string name,
             string developer,

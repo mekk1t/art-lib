@@ -3,16 +3,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Database
 {
-    public class DbGenre : Genre
+    public class DbGenre
     {
-        public new long Id { get; private set; }
+        public long Id { get; private set; }
         [Required]
-        public new string Name { get; private set; }
+        public string Name { get; private set; }
 
         /// <summary>
         /// Конструктор для EF Core.
         /// </summary>
-        internal DbGenre(long id, string name)
+        public DbGenre(long id, string name)
         {
             Id = id;
             Name = name;

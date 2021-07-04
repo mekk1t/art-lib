@@ -90,6 +90,24 @@ namespace ArtLibTests
             result.Should().BeNull();
         }
 
+        [Fact]
+        public void Cant_pass_null_to_update_genre()
+        {
+            Action act = () => _sut.UpdateGenre(null);
+
+            act.Should().Throw<Exception>();
+        }
+
+        [Fact]
+        public void Cant_update_genre_without_id()
+        {
+            var update = new Genre() { Name = "Новый жанр." };
+
+            Action act = () => _sut.UpdateGenre(update);
+
+            act.Should().Throw<DatabaseException>();
+        }
+
         private void SeedGenre() => _sut.CreateGenre(new Genre() { Name = Guid.NewGuid().ToString() });
     }
 }
