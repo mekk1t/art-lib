@@ -74,12 +74,12 @@ namespace ArtLibTests
         [Fact]
         public void Can_get_genre_by_id()
         {
-            SeedGenre();
+            var seed = SeedGenre();
 
-            var result = _sut.GetGenreByIdOrDefault(1);
+            var result = _sut.GetGenreByIdOrDefault(seed.Id);
 
             result.Should().NotBeNull();
-            result.Id.Should().Be(1);
+            result.Id.Should().Be(seed.Id);
         }
 
         [Fact]
