@@ -1,6 +1,6 @@
-﻿using Database.Exceptions;
-using KitProjects.ArtLib.Core.Abstractions;
+﻿using KitProjects.ArtLib.Core.Abstractions;
 using KitProjects.ArtLib.Core.Models;
+using KitProjects.ArtLib.Database.Exceptions;
 using KitProjects.ArtLib.Database.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

@@ -1,9 +1,9 @@
 ﻿using ArtLibTests.Fixtures;
 using Database;
-using Database.Exceptions;
 using FluentAssertions;
 using KitProjects.ArtLib.Core;
 using KitProjects.ArtLib.Core.Models;
+using KitProjects.ArtLib.Database.Exceptions;
 using System;
 using System.Linq;
 using Xunit;

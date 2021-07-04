@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Database.Exceptions
+namespace KitProjects.ArtLib.Database.Exceptions
 {
     public class DatabaseException : Exception
     {
