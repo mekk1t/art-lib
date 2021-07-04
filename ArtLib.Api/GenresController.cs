@@ -1,15 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using KitProjects.Api.AspNetCore;
+using Microsoft.Extensions.Logging;
 
-namespace ArtLibApi
+namespace KitProjects.ArtLib.Api
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class GenresController : ControllerBase
+    public class GenresController : ApiJsonController
     {
+        public GenresController(ILogger<GenresController> logger) : base(logger)
+        {
+        }
     }
 }
