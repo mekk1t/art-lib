@@ -61,6 +61,7 @@ namespace Database
             return _dbContext.Genres
                 .AsNoTracking()
                 .Where(genre => genre.Id >= baseArgs.LastId)
+                .OrderBy(g => g.Id)
                 .Take(baseArgs.Limit)
                 .Select(genre => new Genre(genre.Id) { Name = genre.Name })
                 .ToList();

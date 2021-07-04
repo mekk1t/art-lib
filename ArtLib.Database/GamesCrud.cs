@@ -75,6 +75,7 @@ namespace KitProjects.ArtLib.Database
 
             query = query
                 .Where(g => g.Id >= baseArgs.LastId)
+                .OrderBy(g => g.Id)
                 .Take(baseArgs.Limit);
 
             return query
